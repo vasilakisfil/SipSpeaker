@@ -1,0 +1,22 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    espeak-ruby (1.0.1)
+    logger (1.2.8)
+    mime-types (2.2)
+    net-dns (0.8.0)
+    parseconfig (1.0.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    yard (0.8.7.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  espeak-ruby
+  logger
+  net-dns
+  parseconfig
+  rest-client
+  yard

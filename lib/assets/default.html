@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sip Web Server</title>
+    <link rel="stylesheet" href="vendors/foundation/css/normalize.css">
+    <link rel="stylesheet" href="vendors/foundation/css/foundation.css">
+    <script src="vendors/foundation/js/vendor/modernizr.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">Sip Web Server</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="has-dropdown">
+            <a href="#">Developers</a>
+            <ul class="dropdown">
+              <li><a href="">Vasileios Panopoulos { vpan@kth.se }</a></li>
+              <li><a href="">Filippos Vasilakis { fvas@kth.se }</a></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Left Nav Section -->
+        <ul class="left">
+          <li class="active"><a href="/index">New Message</a></li>
+          <li><a href="/status">Current Message</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+      <div class="small-6 small-offset-3">
+        <div class="panel radius">
+          <h4>Something went wrong</h4>
+          <p id='error'> </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="vendors/foundation/js/vendor/jquery.js" type="text/javascript"></script>
+    <script src="vendors/foundation/js/foundation.min.js" type="text/javascript"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
