@@ -1,2 +1,4 @@
 .yardoc/
 doc/
+*.wav
+*.mp3

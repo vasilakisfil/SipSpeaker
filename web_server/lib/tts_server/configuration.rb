@@ -4,7 +4,7 @@ module TTSServer
   DEFAULT_PAGE = "#{ROOT_DIR}/default.html"
   DEFAULT_MESSAGE = "#{ROOT_DIR}../../../default.wav"
   DEFAULT_MESSAGE_STR = "This is the default message"
-  CURRENT_FILE_MESSAGE = "#{ROOT_DIR}../../../current.wav"
+  CURRENT_FILE_MESSAGE = "#{ROOT_DIR}../../../currentmessage.wav"
 
   def self.message
     if @@message
