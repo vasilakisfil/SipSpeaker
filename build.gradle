@@ -5,10 +5,10 @@ apply plugin:'application'
 sourceSets {
   main {
     java {
-      srcDir 'src/java'
+      srcDir 'sip_server/src/java'
     }
     resources {
-      srcDir 'src/resources'
+      srcDir 'sip_server/src/resources'
     }
   }
 }
@@ -16,10 +16,15 @@ mainClassName = "server.SIPServer"
 
 sourceCompatibility = 1.5
 version = '1.0'
-jar {
-  manifest {
-    attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
-  }
+
+task uberjar(type: Jar) {
+    from files(sourceSets.main.output.classesDir)
+    from files(sourceSets.main.output.resourcesDir)
+    from {configurations.compile.collect {zipTree(it)}}
+
+    manifest {
+        attributes 'Main-Class': 'server.SIPServer'
+    }
 }
 
 repositories {
@@ -31,6 +36,10 @@ dependencies {
   testCompile group: 'junit', name: 'junit', version: '4.+'
   compile group: 'javax.media', name: 'jmf', version: '2.1.1e'
   compile group: 'net.sf.sociaal', name: 'freetts', version: '1.2.2'
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 }
 
 test {

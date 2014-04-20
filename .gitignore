@@ -2,3 +2,6 @@
 doc/
 *.wav
 *.mp3
+.gradle/
+build/
+bin/

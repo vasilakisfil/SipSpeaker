@@ -10,7 +10,12 @@ puts "End configuration:"
 puts options
 
 puts "Starting web server"
-TTSServer::HTTPServer.new(5555).start
+Thread.new {
+  TTSServer::HTTPServer.new(5555).start
+}
 
 puts "Starting sip server"
+cmd = "java -jar build/libs/sip_web_server-1.0.jar -user robot@192.168.0.112:5666"
+value = %x( #{cmd} )
+puts value
 
