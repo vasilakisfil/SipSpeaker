@@ -36,7 +36,7 @@ public class SIPWorker {
       switch (SIPMessages.RequestType(packetInfo.statusLine[0])) {
         case "INVITE":
           this.addCandidateClient(packetInfo);
-        	
+
           String RcvSocketAddr = receivePacket.getSocketAddress().toString();
           System.out.println("INVITE received from: " + RcvSocketAddr);
 
@@ -75,12 +75,12 @@ public class SIPWorker {
         case "ACK":
           System.out.println("ACK received! " + packetInfo.receiverUser);
           if ((packetInfo.receiverUser.equals(Configuration.sipUser()))) {
-          	PacketInfo client = this.getCandidateClient(packetInfo.senderUsername);
-          	if (client != null) {
-          		this.removeCandidateClient(client);
+            PacketInfo client = this.getCandidateClient(packetInfo.senderUsername);
+            if (client != null) {
+              this.removeCandidateClient(client);
               VoIPWorker voipWorker = new VoIPWorker(client);
               voipWorker.run();
-          	}
+            }
             SIPMessages.Bye(packetInfo);
           }
           System.out.print("Clients connected now:" + VoIPWorker.numClients());
@@ -90,19 +90,19 @@ public class SIPWorker {
   }
 
   private void addCandidateClient(PacketInfo packetInfo) {
-  	sipCandidateClients.add(packetInfo);	
+    sipCandidateClients.add(packetInfo);  
   }
-  
+
   private void removeCandidateClient(PacketInfo candidateClient) {
-  	sipCandidateClients.remove(candidateClient);
+    sipCandidateClients.remove(candidateClient);
   }
- 
+
   private PacketInfo getCandidateClient(String address) {
-  	for(PacketInfo obj : sipCandidateClients){
-  		if(obj.senderUsername.equals(address)) {
-  			return obj;
-  		}
-  	}
-  	return null;
+    for(PacketInfo obj : sipCandidateClients){
+      if(obj.senderUsername.equals(address)) {
+        return obj;
+      }
+    }
+    return null;
   }
 }

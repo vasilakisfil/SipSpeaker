@@ -1,12 +1,7 @@
 package server;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
 public class SIPMessages {
 
@@ -47,7 +42,7 @@ public class SIPMessages {
       + "a=fmtp:101 0-11,16\r\n";
     return sdp_message;
   }
-  
+
   public static void Trying(PacketInfo packetInfo) throws UnknownHostException, IOException {
     String message = "SIP/2.0 100 Trying\r\n"
       + "Via: SIP/2.0/UDP " + packetInfo.senderAddress + ";"

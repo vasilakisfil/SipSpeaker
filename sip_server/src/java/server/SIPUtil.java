@@ -60,7 +60,7 @@ public class SIPUtil {
     packetInfo.statusLine = SIPRequest.toArray(new String[SIPRequest.size()]);
     return packetInfo;
   }
-  
+
   public static void SendPacket(String message, String senderAddress, int senderPort)
       throws UnknownHostException, IOException {
     System.out.println("Sending packet...:\n");
@@ -79,8 +79,4 @@ public class SIPUtil {
     SIPWorker.serverSocket.receive(receivePacket);
     return receivePacket;
   }
-  
-  
-  
-  
 }

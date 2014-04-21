@@ -11,7 +11,7 @@ import com.sun.speech.freetts.VoiceManager;
 import com.sun.speech.freetts.audio.AudioPlayer;
 import com.sun.speech.freetts.audio.SingleFileAudioPlayer;
 
- 
+
 import javax.sound.sampled.AudioFileFormat;
 
 public class WavHandler extends Thread {

@@ -17,9 +17,9 @@ public class VoIPWorker implements Runnable {
       this.busy = true;
       WavHandler myWavHandler = new WavHandler();
       myWavHandler.SendWavFile(
-      		Configuration.messageFile(),
-      		this.client.senderAddress,
-      		this.client.senderRtpPort
+          Configuration.messageFile(),
+          this.client.senderAddress,
+          this.client.senderRtpPort
       );
 
       this.busy = false;
@@ -28,26 +28,25 @@ public class VoIPWorker implements Runnable {
     }
     this.removeClient(this.client);
   }
-  
+
   private void addClient(PacketInfo packetInfo) {
-  	sipClients.add(packetInfo);	
+    sipClients.add(packetInfo); 
   }
-  
+
   private void removeClient(PacketInfo candidateClient) {
-  	sipClients.remove(candidateClient);
+    sipClients.remove(candidateClient);
   }
  
   private PacketInfo getClient(String address) {
-  	for(PacketInfo obj : sipClients){
-  		if(obj.senderUsername.equals(address)) {
-  			return obj;
-  		}
-  	}
-  	return null;
-  }
-  
-  public static Integer numClients() {
-  	return sipClients.size();
+    for(PacketInfo obj : sipClients){
+      if(obj.senderUsername.equals(address)) {
+        return obj;
+      }
+    }
+    return null;
   }
 
+  public static Integer numClients() {
+    return sipClients.size();
+  }
 }
