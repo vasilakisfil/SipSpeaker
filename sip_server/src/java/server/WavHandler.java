@@ -14,11 +14,6 @@ import com.sun.speech.freetts.audio.SingleFileAudioPlayer;
  
 import javax.sound.sampled.AudioFileFormat;
 
-
-/**
- *
- * @author Roumpoutsos Nikolaos - Sapountzis Ioannis
- */
 public class WavHandler extends Thread {
 
   public void SendWavFile(String wavFileName, String senderIpAddress, String RtpPort) throws Exception {

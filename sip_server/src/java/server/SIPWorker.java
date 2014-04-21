@@ -26,7 +26,6 @@ public class SIPWorker {
     while (true) {
       System.out.println("Concurrent clients:" + VoIPWorker.numClients());
 
-
       receivePacket = SIPUtil.getPacket();
       String received = new String(receivePacket.getData(), 0, receivePacket.getLength());
 
@@ -34,9 +33,8 @@ public class SIPWorker {
       PacketInfo packetInfo = SIPUtil.parseUDP(received);
       packetInfo.senderPort = receivePacket.getPort();
 
-      switch (SIPUtil.RequestType(packetInfo.statusLine[0])) {
-        //INVITE
-        case 0:
+      switch (SIPMessages.RequestType(packetInfo.statusLine[0])) {
+        case "INVITE":
           this.addCandidateClient(packetInfo);
         	
           String RcvSocketAddr = receivePacket.getSocketAddress().toString();
@@ -50,35 +48,31 @@ public class SIPWorker {
             //}
             //send trying
             System.out.println("Trying");
-            SIPUtil.TryingMessage(packetInfo);
+            SIPMessages.Trying(packetInfo);
             Thread.sleep(100);//wait a little for ringing in softphone
             //send ringing
             System.out.println("Ringing");
-            SIPUtil.RingingMessage(packetInfo);
+            SIPMessages.Ringing(packetInfo);
             Thread.sleep(100);//wait a little for ringing in softphone
             //send OK
             System.out.println("OK");
-            SIPUtil.OKMessage(packetInfo);
+            SIPMessages.Ok(packetInfo);
           } else {
-            SIPUtil.NotFoundMessage(packetInfo);
+            SIPMessages.NotFound(packetInfo);
           }
           break;
-        //OK
-        case 1:
+        case "OK":
           System.out.println("200 OK received!");
           break;
-        //CANCEL
-        case -1:
+        case "CANCEL":
           System.out.println("CANCEL received!");
           break;
-        //BYE
-        case 2:
+        case "BYE":
           System.out.println("BYE received!");
           //removeClient(this);
-          SIPUtil.OKafterBYEMessage(packetInfo);
+          SIPMessages.OkForBye(packetInfo);
           break;
-        //ACK
-        case 3:
+        case "ACK":
           System.out.println("ACK received! " + packetInfo.receiverUser);
           if ((packetInfo.receiverUser.equals(Configuration.sipUser()))) {
           	PacketInfo client = this.getCandidateClient(packetInfo.senderUsername);
@@ -87,14 +81,14 @@ public class SIPWorker {
               VoIPWorker voipWorker = new VoIPWorker(client);
               voipWorker.run();
           	}
-            SIPUtil.SendByeMessage(packetInfo);
+            SIPMessages.Bye(packetInfo);
           }
           System.out.print("Clients connected now:" + VoIPWorker.numClients());
           break;
       }
     }
   }
- 
+
   private void addCandidateClient(PacketInfo packetInfo) {
   	sipCandidateClients.add(packetInfo);	
   }
