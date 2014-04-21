@@ -2,7 +2,11 @@ package server;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class VoIPWorker implements Runnable {
+  static final Logger logger = LogManager.getLogger(VoIPWorker.class.getName());
   private static ArrayList<PacketInfo> sipClients = new ArrayList<PacketInfo>();
   private PacketInfo client;
   private Boolean busy;

@@ -10,7 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class SIPUtil {
+  static final Logger logger = LogManager.getLogger(SIPUtil.class.getName());
 
   public static PacketInfo parseUDP(String packet) {
     PacketInfo packetInfo = new PacketInfo();
@@ -63,8 +67,8 @@ public class SIPUtil {
 
   public static void SendPacket(String message, String senderAddress, int senderPort)
       throws UnknownHostException, IOException {
-    System.out.println("Sending packet...:\n");
-    System.out.println(message);
+  	logger.debug("Sending packet...:\n");
+  	logger.debug(message);
     byte[] sendData = new byte[1024];
     sendData = message.getBytes();
     DatagramPacket SendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName(senderAddress), senderPort);
