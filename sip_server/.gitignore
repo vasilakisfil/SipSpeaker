@@ -5,6 +5,3 @@ bin/
 .project
 .gradle
 .settings
-src/java/server/SIPServer.java
-src/java/server/WavHandler.java
-src/java/server/AudioWorker.java

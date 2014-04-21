@@ -14,4 +14,8 @@ public class SIPInfo {
   public String senderRtpPort;  //Port on which to transmit RTP
 
   public String branch;
+  
+  public boolean busy;
+  
+
 }
