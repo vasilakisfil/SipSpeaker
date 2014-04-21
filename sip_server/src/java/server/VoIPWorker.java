@@ -1,40 +1,53 @@
 package server;
 
+import java.util.ArrayList;
+
 public class VoIPWorker implements Runnable {
-	private static Integer clients = 0;
-	private SIPInfo sipInfo;
-	private Boolean busy;
+  private static ArrayList<PacketInfo> sipClients = new ArrayList<PacketInfo>();
+  private PacketInfo client;
+  private Boolean busy;
 
-	public VoIPWorker(SIPInfo sipInfo) {
-		this.sipInfo = sipInfo;
-		this.increaseClients();
-	}
+  public VoIPWorker(PacketInfo client) {
+    this.client = client;
+    this.addClient(client);
+  }
 
-	public void run() {
+  public void run() {
     try {
-      this.sipInfo.busy = true;
+      this.busy = true;
       WavHandler myWavHandler = new WavHandler();
-      myWavHandler.SendWavFile(Configuration.messageFile(), this.sipInfo.senderAddress, this.sipInfo.senderRtpPort);
-      //Thread.sleep(5000);//for Basic grade
+      myWavHandler.SendWavFile(
+      		Configuration.messageFile(),
+      		this.client.senderAddress,
+      		this.client.senderRtpPort
+      );
 
-      this.sipInfo.busy = false;
-	  } catch (Exception ex) {
-	      ex.printStackTrace();
-	  }
-    this.decreaseClients();
-	}
-
-	public static Integer getClients() {
-		return clients;
-	}
-
-	public static void increaseClients() {
-		VoIPWorker.clients++;
-	}
-	
-	public static void decreaseClients() {
-		VoIPWorker.clients--;
-	}
-
+      this.busy = false;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    this.removeClient(this.client);
+  }
+  
+  private void addClient(PacketInfo packetInfo) {
+  	sipClients.add(packetInfo);	
+  }
+  
+  private void removeClient(PacketInfo candidateClient) {
+  	sipClients.remove(candidateClient);
+  }
+ 
+  private PacketInfo getClient(String address) {
+  	for(PacketInfo obj : sipClients){
+  		if(obj.senderUsername.equals(address)) {
+  			return obj;
+  		}
+  	}
+  	return null;
+  }
+  
+  public static Integer numClients() {
+  	return sipClients.size();
+  }
 
 }
