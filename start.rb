@@ -15,7 +15,7 @@ Thread.new {
 }
 
 puts "Starting sip server"
-cmd = "java -jar build/libs/sip_web_server-1.0.jar -user robot@192.168.0.112:5666"
+cmd = "java -jar build/libs/sip_web_server-1.0.jar --sipUser robot --sipIp 192.168.0.112 --sipPort 5666"
 value = %x( #{cmd} )
 puts value
 

@@ -9,36 +9,44 @@ public class Configuration {
 
   private static String tag = UUID.randomUUID().toString().replace("-", "");
 
-    public static InetAddress httpInterface() throws UnknownHostException {
-        return InetAddress.getByName("127.0.0.1");
-    }
-
-    public static int httpPort() {
-      return 8080;
-    }
+  private static String sipInterface;
+  private static String sipUser;
+  private static Integer sipPort;
 
     public static InetAddress sipInterface() throws UnknownHostException {
-      return InetAddress.getByName("127.0.0.1");
+      return InetAddress.getByName(sipInterface);
+    }
+
+    public static void sipInterface(String ip) {
+      Configuration.sipInterface = ip;
     }
 
     public static String sipUser() {
-      return "robot";
+      return sipUser;
     }
 
-    public static int sipPort() {
-        return 5061;
+    public static void sipUser(String user) {
+      Configuration.sipUser = user;
+    }
+
+    public static Integer sipPort() {
+        return sipPort;
+    }
+
+    public static void sipPort(String port) {
+      Configuration.sipPort = Integer.parseInt(port);
     }
 
     public static String sipAddress() {
-      return "127.0.0.1:5061";
+      return sipInterface + ":" + sipPort;
     }
 
     public static String sipFullAddress() {
-      return "robot@127.0.0.1:5061";
+      return sipUser + "@" + sipAddress();
     }
 
     public static String messageFile() {
-      return "default.wav";
+      return "output.wav";
     }
 
     public static String tag() {

@@ -40,7 +40,7 @@ public class VoIPWorker implements Runnable {
   private void removeClient(PacketInfo candidateClient) {
     sipClients.remove(candidateClient);
   }
- 
+
   private PacketInfo getClient(String address) {
     for(PacketInfo obj : sipClients){
       if(obj.senderUsername.equals(address)) {

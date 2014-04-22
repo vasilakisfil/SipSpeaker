@@ -2,9 +2,9 @@ module TTSServer
   ROOT_DIR = "#{File.expand_path(File.dirname(__FILE__))}/../assets/"
   ERROR_404_PAGE = "#{ROOT_DIR}/404.html"
   DEFAULT_PAGE = "#{ROOT_DIR}/default.html"
-  DEFAULT_MESSAGE = "#{ROOT_DIR}../../../sip_server/default.wav"
+  DEFAULT_MESSAGE = "#{ROOT_DIR}../../../default.wav"
   DEFAULT_MESSAGE_STR = "This is the default message"
-  CURRENT_FILE_MESSAGE = "#{ROOT_DIR}../../../sip_server/currentmessage.wav"
+  CURRENT_FILE_MESSAGE = "#{ROOT_DIR}../../../currentmessage.wav"
 
   def self.message
     if @@message

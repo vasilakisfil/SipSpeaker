@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class SIPMessages {
-	static Integer sequence = 2;
+  static Integer sequence = 2;
   static final Logger logger = LogManager.getLogger(SIPMessages.class.getName());
 
   public static String RequestType(String line) {
@@ -135,7 +135,7 @@ public class SIPMessages {
   }
 
   public static void Bye(PacketInfo packetInfo) throws UnknownHostException, IOException {
-  	
+
     String message = "BYE sip:" + packetInfo.senderAddress + " SIP/2.0\r\n"
       + "Via: SIP/2.0/UDP " + packetInfo.sipAddress + ";"
       + "rport;branch=" + packetInfo.branch + "\r\n"

@@ -28,7 +28,7 @@ public class SIPWorker {
   public void start() throws IOException, InterruptedException {
 
     while (true) {
-    	logger.debug("Concurrent clients:" + VoIPWorker.numClients());
+      logger.debug("Concurrent clients:" + VoIPWorker.numClients());
 
       receivePacket = SIPUtil.getPacket();
       String received = new String(receivePacket.getData(), 0, receivePacket.getLength());
@@ -39,7 +39,7 @@ public class SIPWorker {
 
       switch (SIPMessages.RequestType(packetInfo.statusLine[0])) {
         case "INVITE":
-        	this.processInvite(packetInfo);
+          this.processInvite(packetInfo);
           break;
         case "OK":
           System.out.println("200 OK received!");
@@ -53,19 +53,19 @@ public class SIPWorker {
           SIPMessages.OkForBye(packetInfo);
           break;
         case "ACK":
-        	this.processAck(packetInfo);
+          this.processAck(packetInfo);
           break;
       }
     }
   }
-  
-  
-  
+
+
+
   private void processInvite(PacketInfo packetInfo) throws UnknownHostException, IOException, InterruptedException {
     this.addCandidateClient(packetInfo);
 
     if (packetInfo.receiverUser.equals(Configuration.sipUser())) {
-    	logger.debug("Trying");
+      logger.debug("Trying");
       SIPMessages.Trying(packetInfo);
       Thread.sleep(100);//wait a little for ringing in softphone
       //send ringing
@@ -79,9 +79,9 @@ public class SIPWorker {
       SIPMessages.NotFound(packetInfo);
     }
   }
-  
+
   private void processAck(PacketInfo packetInfo) throws UnknownHostException, IOException {
-  	logger.debug("ACK received! " + packetInfo.receiverUser);
+    logger.debug("ACK received! " + packetInfo.receiverUser);
     if ((packetInfo.receiverUser.equals(Configuration.sipUser()))) {
       PacketInfo client = this.getCandidateClient(packetInfo.senderUsername);
       if (client != null) {
@@ -92,14 +92,14 @@ public class SIPWorker {
       SIPMessages.Bye(packetInfo);
     }
     System.out.println("Clients connected now:" + VoIPWorker.numClients());
-  	
+
   }
-  
+
 
   private void addCandidateClient(PacketInfo packetInfo) {
-  	if (this.getCandidateClient(packetInfo.senderAddress) == null) {
-  		sipCandidateClients.add(packetInfo);
-  	}
+    if (this.getCandidateClient(packetInfo.senderAddress) == null) {
+      sipCandidateClients.add(packetInfo);
+    }
   }
 
   private void removeCandidateClient(PacketInfo candidateClient) {

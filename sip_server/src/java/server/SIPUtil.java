@@ -54,7 +54,7 @@ public class SIPUtil {
         }
         if (line.matches("^o=- .* IN IP4 .*$")) {
           //SIPWorker.session_id = (line.split("=- ")[1]).split(" IN ")[0];
-        	packetInfo.sessionId = (line.split("=- ")[1]).split(" IN ")[0];
+          packetInfo.sessionId = (line.split("=- ")[1]).split(" IN ")[0];
         }
         if (line.matches("^m=audio .* RTP.*$")) {
           //SIPWorker.senderRtpPort = (line.split("audio ")[1]).split(" ")[0];
@@ -67,8 +67,8 @@ public class SIPUtil {
 
   public static void SendPacket(String message, String senderAddress, int senderPort)
       throws UnknownHostException, IOException {
-  	logger.debug("Sending packet...:\n");
-  	logger.debug(message);
+    logger.debug("Sending packet...:\n");
+    logger.debug(message);
     byte[] sendData = new byte[1024];
     sendData = message.getBytes();
     DatagramPacket SendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName(senderAddress), senderPort);
