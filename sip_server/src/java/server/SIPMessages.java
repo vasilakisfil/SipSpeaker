@@ -42,9 +42,9 @@ public class SIPMessages {
       + "t=0 0\r\n"
       + "m=audio " + senderRtpPort + " RTP/AVP 3 101\r\n"
       + "a=sendrecv\r\n"
-      + "a=rtpmap:3 GSM/8000\r\n"
-      + "a=rtpmap:101 telephone-event/8000\r\n"
-      + "a=fmtp:101 0-11,16\r\n";
+      /*+ "a=rtpmap:3 GSM/8000\r\n"*/
+      + "a=rtpmap:0 PCMU/8000/8/1\r\n"
+      + "a=fmtp:0 0-11,16\r\n";
     return sdp_message;
   }
 

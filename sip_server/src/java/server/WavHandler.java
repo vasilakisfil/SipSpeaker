@@ -26,7 +26,7 @@ public class WavHandler extends Thread {
     DataSource source = Manager.createDataSource(new MediaLocator(mediaFile.toURL()));
 
     Processor mediaProcessor = null;
-    Format[] FORMATS = new Format[]{new AudioFormat(AudioFormat.GSM_RTP,8000,8,1)};
+    Format[] FORMATS = new Format[]{new AudioFormat(AudioFormat.ULAW_RTP,8000,8,1)};
     ContentDescriptor CONTENT_DESCRIPTOR = new ContentDescriptor(ContentDescriptor.RAW_RTP);
     mediaProcessor = Manager.createRealizedProcessor(new ProcessorModel(source, FORMATS, CONTENT_DESCRIPTOR));
     DataSink dataSink = null;
