@@ -45,6 +45,9 @@ public class SIPMessages {
       + "a=rtpmap:3 GSM/8000\r\n"
       + "a=rtpmap:101 telephone-event/8000\r\n"
       + "a=fmtp:101 0-11,16\r\n";
+    System.out.println("========== MY SDP ============================");
+    System.out.println(sdp_message);
+    System.out.println("========== MY SDP ============================");
     return sdp_message;
   }
 
@@ -86,7 +89,7 @@ public class SIPMessages {
 
   public static void Ok(PacketInfo packetInfo) throws UnknownHostException, IOException {
 
-    String sdp_message = SIPMessages.getSDP(packetInfo.sessionId, packetInfo.sipAddress, packetInfo.senderAddress);
+    String sdp_message = SIPMessages.getSDP(packetInfo.sessionId, packetInfo.sipAddress, packetInfo.senderRtpPort);
 
     String message = "SIP/2.0 200 OK\r\n"
       + "Via: SIP/2.0/UDP " + packetInfo.senderAddress + ";"

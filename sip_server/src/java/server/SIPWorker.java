@@ -107,6 +107,7 @@ public class SIPWorker {
   }
 
   private PacketInfo getCandidateClient(String address) {
+  	
     for(PacketInfo obj : sipCandidateClients){
       if(obj.senderUsername.equals(address)) {
         return obj;
