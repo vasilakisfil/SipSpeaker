@@ -40,11 +40,19 @@ public class SIPMessages {
       + "s=SJphone\r\n"
       + "c=IN IP4 " + "192.168.0.112" + "\r\n"
       + "t=0 0\r\n"
-      + "m=audio " + senderRtpPort + " RTP/AVP 3 101\r\n"
-      + "a=sendrecv\r\n"
-      /*+ "a=rtpmap:3 GSM/8000\r\n"*/
-      + "a=rtpmap:0 PCMU/8000/8/1\r\n"
-      + "a=fmtp:0 0-11,16\r\n";
+      + "m=audio " + 49999 + " RTP/AVP 0\r\n"
+      /*+ "a=rtpmap:3 GSM/8000\r\n";*/
+      /*
+      + "a=rtpmap:97 iLBC/8000\r\n"
+      + "a=rtpmap:98 iLBC/8000\r\n"
+      + "a=fmtp:98 mode=20\r\n"
+      + "a=rtpmap:8 PCMA/8000\r\n"*/
+      + "a=rtpmap:0 PCMU/8000\r\n";/*
+      + "a=rtpmap:101 telephone-event/8000\r\n"
+      + "a=fmtp:101 0-16\r\n"
+      + "a=setup:active\r\n"
+      + "a=sendrecv\r\n";
+*/
     return sdp_message;
   }
 
