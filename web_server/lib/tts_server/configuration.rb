@@ -3,19 +3,29 @@ module TTSServer
   ERROR_404_PAGE = "#{ROOT_DIR}/404.html"
   DEFAULT_PAGE = "#{ROOT_DIR}/default.html"
   DEFAULT_MESSAGE = "#{ROOT_DIR}../../../default.wav"
-  DEFAULT_MESSAGE_STR = "This is the default message"
   CURRENT_FILE_MESSAGE = "#{ROOT_DIR}../../../currentmessage.wav"
+  DEFAULT_MESSAGE_MP3 = "#{ROOT_DIR}../../../default.mp3"
+  CURRENT_FILE_MESSAGE_MP3 = "#{ROOT_DIR}../../../currentmessage.mp3"
+  @@message = nil
+
+  def self.message=(message)
+    @@message = message
+  end
 
   def self.message
     if @@message
       return @@message
     else
-      return DEFAULT_MESSAGE_STR
+      return @@default_message
     end
   end
 
-  def self.message=(message)
-    @@message = message
+  def self.default_message=(message)
+    @@default_message = message
+  end
+
+  def self.default_message
+    @@default_message
   end
 
   def self.delete_message
@@ -23,11 +33,7 @@ module TTSServer
   end
 
   def self.message_path
-    if @@message
-      return CURRENT_FILE_MESSAGE
-    else
-      return DEFAULT_MESSAGE
-    end
+    return CURRENT_FILE_MESSAGE
   end
 
   def self.defaults

@@ -22,7 +22,7 @@ public class VoIPWorker implements Runnable {
     try {
       this.busy = true;
 
-      SoundSender aDemo = new SoundSender(false, "output.wav");
+      SoundSender aDemo = new SoundSender(false, "currentmessage.wav");
       Participant p = new Participant(this.client.senderAddress,
       		Integer.parseInt(this.client.senderRtpPort),Integer.parseInt(this.client.senderRtpPort+1));
       aDemo.rtpSession.addParticipant(p);

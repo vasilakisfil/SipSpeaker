@@ -1,5 +1,6 @@
 require 'optparse'
 require 'parseconfig'
+require 'open3'
 require_relative 'web_server/lib/tts_server'
 
 
@@ -11,11 +12,21 @@ puts options
 
 puts "Starting web server"
 Thread.new {
-  TTSServer::HTTPServer.new(5555).start
+  TTSServer::HTTPServer.new(5555, options["message_text"]).start
 }
 
 puts "Starting sip server"
-cmd = "java -jar build/libs/sip_web_server-1.0.jar --sipUser robot --sipIp 192.168.0.112 --sipPort 5666"
-value = %x( #{cmd} )
-puts value
+cmd = "java -jar build/libs/sip_web_server-1.0.jar \
+      --sipUser #{options["sip_user"]} \
+      --sipIp #{options["sip_interface"]} \
+      --sipPort #{options["sip_port"]}"
+#value = %x( #{cmd} )
+puts cmd
+Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
+  pid = wait_thr[:pid]
+  stdout.each do |l|
+    puts l
+  end
+end
+#puts value
 

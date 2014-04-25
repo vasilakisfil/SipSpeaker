@@ -15,7 +15,10 @@ module TTSServer
 
     def save(filename)
       @logger.debug { "Saving the audio to filename: #{filename}" }
-      @speech.save(filename)
+      @speech.save("test.mp3")
+      command = "sox test.mp3 -r 8000 -c 1 -b 8 #{filename}"
+      ret_value = %x( #{command} )
+      ret_value = %x( rm test.mp3 )
     end
   end
 end

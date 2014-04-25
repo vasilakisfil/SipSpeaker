@@ -32,7 +32,8 @@ public class SIPServer {
 
     System.out.println(Configuration.sipFullAddress());
 
-    logger.info("Sip Server listening to :" + Configuration.sipInterface() + "- on port :" + Configuration.sipPort());
+    logger.info("Sip Server " + Configuration.sipUser()
+    		+ " listening to :" + Configuration.sipInterface() + "- on port :" + Configuration.sipPort());
     SIPWorker sipWorker = new SIPWorker();
     sipWorker.start();
   }

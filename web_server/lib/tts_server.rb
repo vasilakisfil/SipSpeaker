@@ -18,11 +18,16 @@ module TTSServer
     #
     # @param port [Integer] The port the server listens to
     # @param server_root [String] The directory the server points to
-    def initialize(port)
+    def initialize(port, default_message)
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::DEBUG
       @port = port
-      TTSServer.message = "This is a random message"
+      #initialize message to nil
+      TTSServer.default_message = default_message
+      #save default message to default.wav
+      TTS.new(TTSServer.default_message).save(TTSServer::DEFAULT_MESSAGE)
+      TTSServer.message = default_message
+      TTS.new(TTSServer.message).save(TTSServer.message_path)
     end
 
     # Starts the server ready to accept new connections
