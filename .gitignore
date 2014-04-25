@@ -9,3 +9,5 @@ bin/
 .settings
 .project
 logs/
+!default.wav
+!currentmessage.wav
