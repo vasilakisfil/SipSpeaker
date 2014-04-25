@@ -16,6 +16,10 @@ public class Configuration {
     public static InetAddress sipInterface() throws UnknownHostException {
       return InetAddress.getByName(sipInterface);
     }
+    
+    public static String sipInterfaceStr() throws UnknownHostException {
+      return InetAddress.getByName(sipInterface).toString().replace("/", "");
+    }
 
     public static void sipInterface(String ip) {
       Configuration.sipInterface = ip;

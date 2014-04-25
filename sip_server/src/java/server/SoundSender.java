@@ -1,8 +1,5 @@
 package server;
 
-
-
-
 import java.io.File;
 import java.io.IOException;
 
@@ -141,28 +138,11 @@ public class SoundSender extends Thread implements RTPAppIntf  {
 
                 if (nBytesRead >= 0) {
                     rtpSession.sendData(abData);
-                    //if(!this.local) {
+
                     auline.write(abData, 0, abData.length);
-
-                    //dataCount += abData.length;
-
-                    //if(pktCount % 10 == 0) {
-                    //	System.out.println("pktCount:" + pktCount + " dataCount:" + dataCount);
-                    //
-                    //	long test = 0;
-                    //	for(int i=0; i<abData.length; i++) {
-                    //		test += abData[i];
-                    //	}
-                    //	System.out.println(Long.toString(test));
-                    //}
-
                     pktCount++;
-                    //if(pktCount == 100) {
-                    //	System.out.println("Time!!!!!!!!! " + Long.toString(System.currentTimeMillis()));
-                    //}
-                    //System.out.println("yep");
                 }
-                System.out.println(pktCount);
+                //System.out.println(pktCount);
                 if(pktCount == 300) {
                     Enumeration<Participant> iter = this.rtpSession.getParticipants();
                     //System.out.println("iter " + iter.hasMoreElements());

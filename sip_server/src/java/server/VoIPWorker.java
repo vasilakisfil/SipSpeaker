@@ -30,7 +30,9 @@ public class VoIPWorker implements Runnable {
       try {
           while(aDemo.isAlive()){
               Thread.sleep(800);
-              System.out.println("--------->Thread Status " + aDemo.isAlive());
+              logger.debug("Connection with client "
+	              + this.client.senderAddress + ":" + this.client.senderRtpPort
+	              + "is still " + aDemo.isAlive());
           }
       } catch (InterruptedException e) {
           // TODO Auto-generated catch block

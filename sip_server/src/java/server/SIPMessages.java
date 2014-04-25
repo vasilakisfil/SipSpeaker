@@ -34,15 +34,17 @@ public class SIPMessages {
     return type;
   }
 
-  public static String getSDP(String session_id, String myAddress, String senderRtpPort) {
+  public static String getSDP(PacketInfo packetInfo) throws UnknownHostException {
+  	System.out.println("====>" + packetInfo.senderRtpPort);
+  	System.out.println("====>" + Configuration.sipInterfaceStr());
+
     String sdp_message = "v=0\r\n"
-        + "o=- " + session_id + " IN IP4 " + "192.168.0.112" + "\r\n"
+        + "o=- " + packetInfo.sessionId + " IN IP4 " + Configuration.sipInterfaceStr() + "\r\n"
         + "s=SJphone\r\n"
-        + "c=IN IP4 " + "192.168.0.112" + "\r\n"
+        + "c=IN IP4 " + Configuration.sipInterfaceStr() + "\r\n"
         + "t=0 0\r\n"
-        + "m=audio " + senderRtpPort + " RTP/AVP  97 96 0 8 3 101\r\n"
+        + "m=audio " + packetInfo.senderRtpPort + " RTP/AVP 0 97 96 8 3 101\r\n"
         + "a=sendrecv\r\n"
-        //+ "a=rtpmap:0 PCM/8000\r\n"
         + "a=rtpmap:96 PCMU-WB/16000\r\n"
         + "a=rtpmap:97 PCMA-WB/16000\r\n"
         + "a=rtpmap:0 PCMU/8000/1\r\n"
@@ -91,7 +93,7 @@ public class SIPMessages {
 
   public static void Ok(PacketInfo packetInfo) throws UnknownHostException, IOException {
 
-    String sdp_message = SIPMessages.getSDP(packetInfo.sessionId, packetInfo.sipAddress, packetInfo.senderRtpPort);
+    String sdp_message = SIPMessages.getSDP(packetInfo);
 
     String message = "SIP/2.0 200 OK\r\n"
       + "Via: SIP/2.0/UDP " + packetInfo.senderAddress + ";"
