@@ -19,12 +19,15 @@ public class VoIPWorker implements Runnable {
   public void run() {
     try {
       this.busy = true;
+      /*
       WavHandler myWavHandler = new WavHandler();
       myWavHandler.SendWavFile(
-          Configuration.messageFile(),
+          "test.wav",
           this.client.senderAddress,
           this.client.senderRtpPort
       );
+      */
+      Communication com = new Communication(this.client);
 
       this.busy = false;
     } catch (Exception ex) {

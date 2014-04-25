@@ -1,5 +1,6 @@
 require 'optparse'
 require 'parseconfig'
+require 'open3'
 require_relative 'web_server/lib/tts_server'
 
 
@@ -16,6 +17,12 @@ Thread.new {
 
 puts "Starting sip server"
 cmd = "java -jar build/libs/sip_web_server-1.0.jar --sipUser robot --sipIp 192.168.0.112 --sipPort 5666"
-value = %x( #{cmd} )
-puts value
+#value = %x( #{cmd} )
+#stdin, stdout, stderr, wait_thr = Open3.popen3(cmd)
+#pid = wait_thr[:pid]
+Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
+    stdout.each do |l|
+      puts l
+    end
+end
 

@@ -34,7 +34,7 @@ public class SIPUtil {
           packetInfo.viaAddress = line.substring(("Via: SIP/2.0/UDP ").length(), line.indexOf(";"));
 
         }
-        if (line.startsWith("To: <")) {
+        if (line.startsWith("To:")) {
           packetInfo.receiverUser = line.split("@")[0].split("sip:")[1];
             System.out.println("To-------------------" + packetInfo.receiverUser);
         }
