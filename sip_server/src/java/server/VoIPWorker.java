@@ -7,7 +7,7 @@ import jlibrtp.Participant;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class VoIPWorker implements Runnable {
+public class VoIPWorker extends Thread {
   static final Logger logger = LogManager.getLogger(VoIPWorker.class.getName());
   private static ArrayList<PacketInfo> sipClients = new ArrayList<PacketInfo>();
   private PacketInfo client;
@@ -41,22 +41,26 @@ public class VoIPWorker implements Runnable {
       //Thread.sleep(5000);//for Basic grade
 
       this.busy = false;
+      SIPMessages.Bye(this.client);
     } catch (Exception ex) {
         ex.printStackTrace();
     }
+    
+
+    
     this.removeClient(this.client);
   }
 
   private void addClient(PacketInfo packetInfo) {
-    sipClients.add(packetInfo); 
+    VoIPWorker.sipClients.add(packetInfo); 
   }
 
   private void removeClient(PacketInfo candidateClient) {
-    sipClients.remove(candidateClient);
+    VoIPWorker.sipClients.remove(candidateClient);
   }
 
   private PacketInfo getClient(String address) {
-    for(PacketInfo obj : sipClients){
+    for(PacketInfo obj : VoIPWorker.sipClients){
       if(obj.senderUsername.equals(address)) {
         return obj;
       }
@@ -65,6 +69,6 @@ public class VoIPWorker implements Runnable {
   }
 
   public static Integer numClients() {
-    return sipClients.size();
+    return VoIPWorker.sipClients.size();
   }
 }

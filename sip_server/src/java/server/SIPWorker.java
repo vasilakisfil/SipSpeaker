@@ -87,9 +87,8 @@ public class SIPWorker {
       if (client != null) {
         this.removeCandidateClient(client);
         VoIPWorker voipWorker = new VoIPWorker(client);
-        voipWorker.run();
+        voipWorker.start();
       }
-      SIPMessages.Bye(packetInfo);
     }
     System.out.println("Clients connected now:" + VoIPWorker.numClients());
 

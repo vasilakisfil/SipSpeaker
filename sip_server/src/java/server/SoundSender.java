@@ -16,6 +16,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.lang.String;
 import java.net.DatagramSocket;
 import java.util.Enumeration;
+import java.util.Random;
 import java.util.ResourceBundle.Control;
 
 import jlibrtp.*;
@@ -35,10 +36,11 @@ public class SoundSender extends Thread implements RTPAppIntf  {
 
     public SoundSender(boolean isLocal, String file)  {
         this.filename = file;
-
+        Random r = new Random();
+        Integer port = r.nextInt(55000-15000) + 15000;
         try {
-            DatagramSocket rtpSocket = new DatagramSocket(16986);
-            DatagramSocket rtcpSocket = new DatagramSocket(1687);
+            DatagramSocket rtpSocket = new DatagramSocket(port);
+            DatagramSocket rtcpSocket = new DatagramSocket(port+1);
 
 
             rtpSession = new RTPSession(rtpSocket, rtcpSocket);
