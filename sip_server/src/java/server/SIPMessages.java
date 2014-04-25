@@ -36,18 +36,20 @@ public class SIPMessages {
 
   public static String getSDP(String session_id, String myAddress, String senderRtpPort) {
     String sdp_message = "v=0\r\n"
-      + "o=- " + session_id + " IN IP4 " + myAddress + "\r\n"
-      + "s=SJphone\r\n"
-      + "c=IN IP4 " + myAddress + "\r\n"
-      + "t=0 0\r\n"
-      + "m=audio " + senderRtpPort + " RTP/AVP 3 101\r\n"
-      + "a=sendrecv\r\n"
-      + "a=rtpmap:3 GSM/8000\r\n"
-      + "a=rtpmap:101 telephone-event/8000\r\n"
-      + "a=fmtp:101 0-11,16\r\n";
-    System.out.println("========== MY SDP ============================");
-    System.out.println(sdp_message);
-    System.out.println("========== MY SDP ============================");
+        + "o=- " + session_id + " IN IP4 " + "192.168.0.112" + "\r\n"
+        + "s=SJphone\r\n"
+        + "c=IN IP4 " + "192.168.0.112" + "\r\n"
+        + "t=0 0\r\n"
+        + "m=audio " + senderRtpPort + " RTP/AVP  97 96 0 8 3 101\r\n"
+        + "a=sendrecv\r\n"
+        //+ "a=rtpmap:0 PCM/8000\r\n"
+        + "a=rtpmap:96 PCMU-WB/16000\r\n"
+        + "a=rtpmap:97 PCMA-WB/16000\r\n"
+        + "a=rtpmap:0 PCMU/8000/1\r\n"
+        + "a=rtpmap:8 PCMA/8000\r\n"
+        + "a=rtpmap:3 GSM/8000\r\n"
+        + "a=rtpmap:101 telephone-event/8000\r\n"
+        + "a=fmtp:101 0-11,16\r\n";
     return sdp_message;
   }
 

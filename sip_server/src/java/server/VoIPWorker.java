@@ -2,6 +2,8 @@ package server;
 
 import java.util.ArrayList;
 
+import jlibrtp.Participant;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,15 +21,22 @@ public class VoIPWorker implements Runnable {
   public void run() {
     try {
       this.busy = true;
-      /*
-      WavHandler myWavHandler = new WavHandler();
-      myWavHandler.SendWavFile(
-          Configuration.messageFile(),
-          this.client.senderAddress,
-          this.client.senderRtpPort
-      );*/
-      SoundSenderDemo demo = new SoundSenderDemo(true, this.client);
-      demo.start();
+
+      SoundSender aDemo = new SoundSender(false, "output.wav");
+      Participant p = new Participant(this.client.senderAddress,
+      		Integer.parseInt(this.client.senderRtpPort),Integer.parseInt(this.client.senderRtpPort+1));
+      aDemo.rtpSession.addParticipant(p);
+      aDemo.start();
+      try {
+          while(aDemo.isAlive()){
+              Thread.sleep(800);
+              System.out.println("--------->Thread Status " + aDemo.isAlive());
+          }
+      } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+      }
+      //Thread.sleep(5000);//for Basic grade
 
       this.busy = false;
     } catch (Exception ex) {
