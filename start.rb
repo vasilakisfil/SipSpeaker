@@ -16,7 +16,7 @@ Thread.new {
 }
 
 puts "Starting sip server"
-cmd = "java -jar build/libs/sip_web_server-1.0.jar \
+cmd = "java -jar build/libs/SipSpeaker-1.0.jar \
       --sipUser #{options["sip_user"]} \
       --sipIp #{options["sip_interface"]} \
       --sipPort #{options["sip_port"]}"
