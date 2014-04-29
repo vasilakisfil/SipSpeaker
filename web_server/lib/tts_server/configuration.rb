@@ -96,6 +96,9 @@ module TTSServer
       options["sip_user"] = config["sip_user"]
     end
     if !config["http_interface"].nil? && !config["http_interface"].empty?
+      options["http_interface"] = config["http_interface"]
+    end
+    if !config["http_port"].nil? && !config["http_port"].empty?
       options["http_port"] = config["http_port"]
     end
 
@@ -118,7 +121,7 @@ module TTSServer
       end
 
       opts.on("-h", "--http http", "Specify web server address") do |v|
-        options["http_bind_address"] = v
+        options["http"] = v
       end
     end
 
@@ -127,6 +130,32 @@ module TTSServer
     rescue OptionParser::InvalidOption => e
       puts args.help()
       exit
+    end
+
+    if options["sip_uri"]
+      options["sip_user"] = options["sip_uri"].split("@")[0]
+      if options["sip_uri"].include? ":"
+        options["sip_interface"] = options["sip_uri"].split("@")[1].split(":")[0]
+        options["sip_port"] = options["sip_uri"].split(":")[1]
+      else
+        options["sip_interface"] = options["sip_uri"].split("@")[1]
+        options["sip_port"] = "5666"
+      end
+    end
+
+    if options["http"]
+      if options["http"].include? ":"
+        options["http_interface"] = options["http"].split(":")[0]
+        options["http_port"] = options["http"].split(":")[1]
+      else
+        if options["http"].include? "."
+          options["http_interface"] = options["http"]
+          options["http_port"] = "8080"
+        else
+          options["http_interface"] = "0.0.0.0"
+          options["http_port"] = options["http"]
+        end
+      end
     end
 
     return options

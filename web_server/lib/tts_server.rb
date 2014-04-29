@@ -12,16 +12,17 @@ require_relative 'tts_server/tts'
 module TTSServer
   # Starts and initiates the HTTP server
   class HTTPServer
-    attr_reader :config_path, :server_root, :port
+    attr_reader :config_path, :server_root, :ip, :port
 
     # Initializes the HTTP server
     #
     # @param port [Integer] The port the server listens to
     # @param server_root [String] The directory the server points to
-    def initialize(port, default_message)
+    def initialize(ip, port, default_message)
       @logger = Logger.new(STDOUT)
       @logger.level = Logger::DEBUG
       @port = port
+      @ip = ip
       #initialize message to nil
       TTSServer.default_message = default_message
       #save default message to default.wav
@@ -33,8 +34,8 @@ module TTSServer
     # Starts the server ready to accept new connections
     def start
       @logger.debug { "Opening server" }
-      @tcp_server = TCPServer.new("0.0.0.0", @port)
-      @logger.debug { "Listening to 0.0.0.0 port #{@port}
+      @tcp_server = TCPServer.new(@ip, @port)
+      @logger.debug { "Listening to #{@ip} port #{@port}
                       pointing #{ROOT_DIR}" }
 
       answer_worker = AnswerWorker.new
